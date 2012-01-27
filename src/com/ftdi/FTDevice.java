@@ -112,6 +112,25 @@ public class FTDevice {
         return flag;
     }
 
+    /**
+     * Is this FTDevice opened?
+     *
+     * @return True if FTDevice is opened.
+     */
+    public boolean isOpened() {
+        return (flag & FTD2XX.FT_FLAGS_OPENED) != 0;
+    }
+
+    /**
+     * Is the device enumerated as a high-speed USB device?
+     *
+     * @return True if the device is enumerated as a high-speed USB device, false
+     *         if full-speed.
+     */
+    public boolean isHighSpeed() {
+        return (flag & FTD2XX.FT_FLAGS_HISPEED) != 0;
+    }
+
     @Override
     public boolean equals(Object obj) {
         if (obj == this) {
