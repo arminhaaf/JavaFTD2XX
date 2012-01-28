@@ -285,6 +285,35 @@ public class FTDevice {
     }
 
     /**
+     * Get a connected FTDI device by serialnumber.
+     * @param serialNumber Filtering option, exact match need.
+     * @return the Device
+     * @throws FTD2XXException If something goes wrong.
+     */
+    public static FTDevice openDeviceBySerialNumber(String serialNumber)
+            throws FTD2XXException {
+
+        PointerByReference ftHandle = new PointerByReference();
+        Memory devSerNum = new Memory(16);
+        devSerNum.setString(0, serialNumber);
+
+        ensureFTStatus(ftd2xx.FT_OpenEx(devSerNum, FTD2XX.FT_OPEN_BY_SERIAL_NUMBER, ftHandle));
+
+        IntByReference flag = new IntByReference();
+        IntByReference devType = new IntByReference();
+        IntByReference devID = new IntByReference();
+        IntByReference locID = new IntByReference();
+        Memory devDesc = new Memory(64);
+
+        ensureFTStatus(ftd2xx.FT_GetDeviceInfo(ftHandle.getValue(), devType,
+                locID, devSerNum, devDesc, null));
+
+        return new FTDevice(DeviceType.values()[devType.getValue()],
+                devID.getValue(), locID.getValue(), devSerNum.getString(0),
+                devDesc.getString(0), ftHandle.getValue(), flag.getValue());
+    }
+
+    /**
      * Get the connected FTDI devices. It will not contain opened devices.
      * @param deviceType Filtering option.
      * @return List contain available FTDI devices.
