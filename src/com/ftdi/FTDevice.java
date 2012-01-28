@@ -189,7 +189,7 @@ public class FTDevice {
     }
 
     /**
-     * Get the connected FTDI devices.
+     * Get the connected FTDI devices. CAVEAT, this method will recreate the device info list.
      * @param isIncludeOpenedDevices Would you like to see opened devices?
      * @return List contain available FTDI devices.
      * @throws FTD2XXException If something goes wrong.
@@ -223,7 +223,7 @@ public class FTDevice {
     }
 
     /**
-     * Get the connected FTDI devices. It will not contain opened devices.
+     * Get the connected FTDI devices. It will not contain opened devices. CAVEAT, this method will recreate the device info list.
      * @param description Filtering option, exact match need.
      * @return List contain available FTDI devices.
      * @throws FTD2XXException If something goes wrong.
@@ -254,7 +254,7 @@ public class FTDevice {
     }
 
     /**
-     * Get the connected FTDI devices. It will not contain opened devices.
+     * Get the connected FTDI devices. It will not contain opened devices. CAVEAT, this method will recreate the device info list.
      * @param serialNumber Filtering option, exact match need.
      * @return List contain available FTDI devices.
      * @throws FTD2XXException If something goes wrong.
@@ -314,7 +314,7 @@ public class FTDevice {
     }
 
     /**
-     * Get the connected FTDI devices. It will not contain opened devices.
+     * Get the connected FTDI devices. It will not contain opened devices. CAVEAT, this method will recreate the device info list.
      * @param deviceType Filtering option.
      * @return List contain available FTDI devices.
      * @throws FTD2XXException If something goes wrong.
